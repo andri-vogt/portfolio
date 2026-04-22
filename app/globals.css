@@ -1,0 +1,92 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #FFFAF4;
+  --fg: #000000;
+  --muted: #5e5e5e;
+  --hairline: rgba(0, 0, 0, 0.28);
+  --space-section: 8rem;
+  --space-gutter: 2rem;
+  --text-display: clamp(3.5rem, 9vw, 8rem);
+  --text-mono: 0.8125rem;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #000000;
+    --fg: #FFFAF4;
+    --muted: #a8a8a8;
+    --hairline: rgba(255, 255, 255, 0.32);
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-hairline: var(--hairline);
+  --font-sans: var(--font-dm-sans);
+  --font-mono: var(--font-ibm-plex-mono);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-dm-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::selection {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.font-mono {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+}
+
+.text-display {
+  font-size: var(--text-display);
+  line-height: 0.95;
+  letter-spacing: -0.03em;
+}
+
+.text-mono-label {
+  font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
+  font-size: var(--text-mono);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hairline {
+  height: 1px;
+  background: var(--hairline);
+  width: 100%;
+  border: 0;
+}
+
+.link-underline {
+  position: relative;
+  display: inline-block;
+}
+
+.link-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -2px;
+  height: 1px;
+  width: 100%;
+  background: currentColor;
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 300ms ease;
+}
+
+.link-underline:hover::after,
+.link-underline-active::after {
+  transform: scaleX(1);
+}
