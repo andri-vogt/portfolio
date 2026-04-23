@@ -1,10 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #FFFAF4;
-  --fg: #000000;
-  --muted: #5e5e5e;
-  --hairline: rgba(0, 0, 0, 0.28);
+  --bg: #000000;
+  --fg: #FFFAF4;
+  --muted: #a8a8a8;
+  --hairline: rgba(255, 255, 255, 0.32);
   --space-section: 8rem;
   --space-gutter: 2rem;
   --text-display: clamp(3.5rem, 9vw, 8rem);
