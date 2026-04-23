@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
 
 const parent: Variants = {
@@ -34,18 +35,33 @@ export default function About() {
         variants={child}
         className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-10 md:gap-x-10"
       >
-        <div className="font-sans text-xl md:text-2xl leading-[1.4] max-w-2xl">
-          <p>
-            I&apos;m a designer and developer based in Zurich, working at the
-            seam between editorial design and quiet, usable software. Most of
-            what I make is for small teams who want one careful thing rather
-            than ten hurried ones.
-          </p>
-          <p className="mt-6">
-            My practice is built around restraint — typography that earns the
-            page, interfaces that don&apos;t announce themselves, and tools that
-            stay out of their own way.
-          </p>
+        <div className="max-w-2xl">
+          <div className="font-sans text-xl md:text-2xl leading-[1.4]">
+            <p>
+              I&apos;m a designer and developer based in Zurich, working at the
+              seam between editorial design and quiet, usable software. Most of
+              what I make is for small teams who want one careful thing rather
+              than ten hurried ones.
+            </p>
+            <p className="mt-6">
+              My practice is built around restraint — typography that earns the
+              page, interfaces that don&apos;t announce themselves, and tools
+              that stay out of their own way.
+            </p>
+          </div>
+
+          <Link
+            href="/cv"
+            className="group mt-8 md:mt-10 inline-flex items-baseline gap-3 font-sans text-xl md:text-2xl leading-[1.4]"
+          >
+            <span className="link-underline">Read the full CV</span>
+            <span
+              aria-hidden
+              className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1"
+            >
+              →
+            </span>
+          </Link>
         </div>
 
         <div className="flex flex-col gap-5 md:pt-3 md:translate-y-1">

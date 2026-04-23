@@ -11,15 +11,6 @@
   --text-mono: 0.8125rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #000000;
-    --fg: #FFFAF4;
-    --muted: #a8a8a8;
-    --hairline: rgba(255, 255, 255, 0.32);
-  }
-}
-
 @theme inline {
   --color-bg: var(--bg);
   --color-fg: var(--fg);
@@ -90,3 +81,76 @@ body {
 .link-underline-active::after {
   transform: scaleX(1);
 }
+
+@media print {
+  @page {
+    margin: 18mm 16mm;
+  }
+
+  :root,
+  html,
+  body {
+    background: #ffffff !important;
+    color: #000000 !important;
+    --bg: #ffffff;
+    --fg: #000000;
+    --muted: #444444;
+    --hairline: rgba(0, 0, 0, 0.3);
+  }
+
+  nav,
+  .no-print {
+    display: none !important;
+  }
+
+  main.cv {
+    padding: 0 !important;
+    min-height: 0 !important;
+  }
+
+  main.cv,
+  main.cv * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  main.cv .grid {
+    display: block !important;
+  }
+
+  main.cv .grid > * + * {
+    margin-top: 0.75rem;
+  }
+
+  main.cv h1 {
+    font-size: 2.25rem !important;
+    line-height: 1.1 !important;
+    letter-spacing: -0.02em !important;
+  }
+
+  main.cv h3 {
+    font-size: 1.125rem !important;
+    line-height: 1.3 !important;
+  }
+
+  main.cv p,
+  main.cv li {
+    font-size: 0.95rem !important;
+    line-height: 1.45 !important;
+  }
+
+  main.cv section,
+  main.cv > * {
+    page-break-inside: auto;
+  }
+
+  main.cv h2,
+  main.cv h3 {
+    page-break-after: avoid;
+  }
+
+  a[href]::after {
+    content: "";
+  }
+}
+
