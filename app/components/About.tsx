@@ -1,7 +1,9 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
+import aboutImage from "@/assets/frederic-perez-RDNAtCk5rJ8-unsplash.jpg";
 
 const parent: Variants = {
   hidden: {},
@@ -25,17 +27,21 @@ export default function About() {
     >
       <motion.div
         variants={child}
-        className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-4 md:gap-x-10 mb-20 md:mb-28"
+        className="grid grid-cols-1 md:grid-cols-[2fr_1fr_2fr] gap-y-10"
       >
-        <h2 className="text-mono-label">about</h2>
-        <span className="text-mono-label md:pt-2">profile</span>
-      </motion.div>
+        <div className="relative aspect-[4/3] overflow-hidden self-center">
+          <Image
+            src={aboutImage}
+            alt=""
+            fill
+            placeholder="blur"
+            sizes="(min-width: 768px) 60vw, 100vw"
+            className="object-cover"
+          />
+        </div>
 
-      <motion.div
-        variants={child}
-        className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-10 md:gap-x-10"
-      >
-        <div className="max-w-2xl">
+        <div className="md:col-start-3">
+          <h2 className="text-mono-label mb-10 md:mb-14">about</h2>
           <div className="font-sans text-xl md:text-2xl leading-[1.4]">
             <p>
               I&apos;m a designer and developer based in Zurich, working at the
@@ -62,20 +68,20 @@ export default function About() {
               →
             </span>
           </Link>
-        </div>
 
-        <div className="flex flex-col gap-5 md:pt-3 md:translate-y-1">
-          <div className="flex flex-col gap-1">
-            <span className="text-mono-label">based</span>
-            <span className="font-mono text-sm">Zurich, CH</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-mono-label">focus</span>
-            <span className="font-mono text-sm">design + engineering</span>
-          </div>
-          <div className="flex flex-col gap-1">
-            <span className="text-mono-label">availability</span>
-            <span className="font-mono text-sm">selected projects, 2026</span>
+          <div className="flex flex-col gap-5 mt-10 md:mt-14">
+            <div className="flex flex-col gap-1">
+              <span className="text-mono-label">based</span>
+              <span className="font-mono text-sm">Zurich, CH</span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-mono-label">focus</span>
+              <span className="font-mono text-sm">design + engineering</span>
+            </div>
+            <div className="flex flex-col gap-1">
+              <span className="text-mono-label">availability</span>
+              <span className="font-mono text-sm">selected projects, 2026</span>
+            </div>
           </div>
         </div>
       </motion.div>

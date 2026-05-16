@@ -33,7 +33,7 @@ export default function Contact() {
         className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-4 md:gap-x-10 mb-20 md:mb-28"
       >
         <h2 className="text-mono-label">contact</h2>
-        <span className="text-mono-label md:pt-2">say hello</span>
+        <span className="text-mono-label md:pt-2 hidden md:block">say hello</span>
       </motion.div>
 
       <motion.h3
