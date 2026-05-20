@@ -28,7 +28,7 @@ export default function About() {
         className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-4 md:gap-x-10 mb-20 md:mb-28"
       >
         <h2 className="text-mono-label">about</h2>
-        <span className="text-mono-label md:pt-2">profile</span>
+        <span className="hidden md:inline text-mono-label md:pt-2">profile</span>
       </motion.div>
 
       <motion.div
@@ -54,10 +54,10 @@ export default function About() {
             href="/cv"
             className="group mt-8 md:mt-10 inline-flex items-baseline gap-3 font-sans text-xl md:text-2xl leading-[1.4]"
           >
-            <span className="link-underline">Read the full CV</span>
+            <span className="link-underline">full CV</span>
             <span
               aria-hidden
-              className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1"
+              className="inline-block"
             >
               →
             </span>

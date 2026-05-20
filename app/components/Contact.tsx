@@ -33,30 +33,35 @@ export default function Contact() {
         className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-4 md:gap-x-10 mb-20 md:mb-28"
       >
         <h2 className="text-mono-label">contact</h2>
-        <span className="text-mono-label md:pt-2">say hello</span>
+        <span className="hidden md:inline text-mono-label md:pt-2">say hello</span>
       </motion.div>
 
-      <motion.h3
+      <motion.div
         variants={child}
-        className="text-display font-sans font-medium mb-16 md:mb-20"
+        className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-12 md:gap-x-10"
       >
-        Let&apos;s work.
-      </motion.h3>
+        <h3 className="text-display font-sans font-medium max-w-2xl">
+          Let&apos;s work.
+        </h3>
 
-      <motion.ul variants={parent} className="flex flex-col gap-4">
-        {links.map((link) => (
-          <motion.li key={link.href} variants={child}>
-            <a
-              href={link.href}
-              target={link.href.startsWith("http") ? "_blank" : undefined}
-              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              className="font-mono text-sm md:text-base link-underline"
-            >
-              {link.label}
-            </a>
-          </motion.li>
-        ))}
-      </motion.ul>
+        <motion.ul
+          variants={parent}
+          className="flex flex-col gap-4 md:pt-3 md:translate-y-1"
+        >
+          {links.map((link) => (
+            <motion.li key={link.href} variants={child}>
+              <a
+                href={link.href}
+                target={link.href.startsWith("http") ? "_blank" : undefined}
+                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+                className="font-mono text-sm link-underline"
+              >
+                {link.label}
+              </a>
+            </motion.li>
+          ))}
+        </motion.ul>
+      </motion.div>
     </motion.section>
   );
 }
