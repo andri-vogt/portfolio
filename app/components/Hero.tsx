@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import heroImage from "@/assets/frederic-perez-RDNAtCk5rJ8-unsplash.jpg";
+import heroImage from "@/assets/DSC00688.JPG";
 
 const parent: Variants = {
   hidden: {},
@@ -16,40 +16,31 @@ const child: Variants = {
 
 export default function Hero() {
   return (
-    <section
+    <motion.section
       id="top"
-      className="relative isolate min-h-screen flex flex-col justify-end overflow-hidden px-6 md:px-10 pt-24 pb-32 md:pb-32"
+      variants={parent}
+      initial="hidden"
+      animate="show"
+      className="px-6 md:px-10 pt-20 md:pt-24 min-h-screen grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10"
     >
-      <Image
-        src={heroImage}
-        alt=""
-        aria-hidden
-        fill
-        priority
-        placeholder="blur"
-        sizes="100vw"
-        className="-z-20 object-cover"
-      />
-      <div
-        aria-hidden
-        className="-z-10 absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-black/40"
-      />
-      <div aria-hidden className="grain -z-10 absolute inset-0" />
-
-      <motion.div variants={parent} initial="hidden" animate="show" className="max-w-6xl">
-        <motion.h1
-          variants={child}
-          className="text-display font-sans font-medium"
-        >
-          Andri Vogt
-        </motion.h1>
-        <motion.p
-          variants={child}
-          className="font-mono text-[length:var(--text-mono)] uppercase tracking-[0.08em] text-white/70 mt-8 md:mt-10"
-        >
-          designer · product owner
-        </motion.p>
+      <motion.div variants={child} className="flex items-center justify-end md:justify-end pt-16 md:pt-0 md:col-start-2 md:row-start-1">
+        <div className="relative aspect-[4/3] w-3/4 md:w-full max-w-md overflow-hidden">
+          <Image
+            src={heroImage}
+            alt=""
+            fill
+            priority
+            sizes="(min-width: 768px) 40vw, 100vw"
+            className="object-cover"
+          />
+        </div>
       </motion.div>
-    </section>
+      <motion.div variants={child} className="flex items-end pb-12 md:pb-16 md:col-start-1 md:row-start-1">
+        <div>
+          <h1 className="text-display font-sans font-medium">Andri Vogt</h1>
+          <p className="text-mono-label mt-4 md:mt-6">designer · product owner</p>
+        </div>
+      </motion.div>
+    </motion.section>
   );
 }

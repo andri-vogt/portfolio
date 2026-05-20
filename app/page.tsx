@@ -10,6 +10,7 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
+      <Divider />
       <About />
       <Divider />
       <Work />

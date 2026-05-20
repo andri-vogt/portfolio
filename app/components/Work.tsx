@@ -15,11 +15,14 @@ const child: Variants = {
   show: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
 };
 
-function ProjectRow({ project }: { project: (typeof projects)[number] }) {
+function ProjectRow({ project, first }: { project: (typeof projects)[number]; first?: boolean }) {
   const [hovered, setHovered] = useState(false);
 
   return (
-    <motion.li variants={child}>
+    <motion.li
+      variants={child}
+      className={first ? "" : "border-t border-[color:var(--hairline)]"}
+    >
       <Link
         href={`/work/${project.slug}`}
         onMouseEnter={() => setHovered(true)}
@@ -28,7 +31,9 @@ function ProjectRow({ project }: { project: (typeof projects)[number] }) {
       >
         <div className="grid grid-cols-1 md:grid-cols-[3fr_2fr] gap-y-6 md:gap-x-10 items-start">
           <div className="flex flex-col gap-5">
-            <h3 className={`text-4xl md:text-6xl font-sans font-medium leading-[0.95] tracking-[-0.02em] link-underline self-start ${hovered ? "link-underline-active" : ""}`}>
+            <h3
+              className={`text-4xl md:text-6xl font-sans font-medium leading-[0.95] tracking-[-0.02em] link-underline self-start ${hovered ? "link-underline-active" : ""}`}
+            >
               {project.title}
             </h3>
             <p className="font-sans text-base md:text-lg text-[color:var(--muted)] max-w-md">
@@ -63,8 +68,8 @@ export default function Work() {
       </motion.div>
 
       <ul>
-        {projects.map((project) => (
-          <ProjectRow key={project.slug} project={project} />
+        {projects.map((project, i) => (
+          <ProjectRow key={project.slug} project={project} first={i === 0} />
         ))}
       </ul>
     </motion.section>
