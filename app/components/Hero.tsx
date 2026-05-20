@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
-import heroImage from "@/assets/DSC00688.JPG";
+import heroImage from "@/assets/DSC00688.jpg";
 
 const parent: Variants = {
   hidden: {},
