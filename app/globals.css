@@ -1,8 +1,8 @@
 @import "tailwindcss";
 
 :root {
-  --bg: #000000;
-  --fg: #FFFAF4;
+  --bg: #080808;
+  --fg: #f6f7f9;
   --muted: #a8a8a8;
   --hairline: rgba(255, 255, 255, 0.32);
   --space-section: 8rem;
