@@ -1,8 +1,7 @@
 import Nav from "./components/Nav";
 import Hero from "./components/Hero";
-import Divider from "./components/Divider";
-import Work from "./components/Work";
 import About from "./components/About";
+import Work from "./components/Work";
 import Contact from "./components/Contact";
 
 export default function Home() {
@@ -10,11 +9,8 @@ export default function Home() {
     <main>
       <Nav />
       <Hero />
-      <Divider />
       <About />
-      <Divider />
       <Work />
-      <Divider />
       <Contact />
     </main>
   );

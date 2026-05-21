@@ -1,10 +1,10 @@
 import type { Metadata } from "next";
-import { DM_Sans, IBM_Plex_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
-const dmSans = DM_Sans({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-dm-sans",
+  variable: "--font-inter",
   display: "swap",
 });
 
@@ -14,6 +14,12 @@ const ibmPlexMono = IBM_Plex_Mono({
   variable: "--font-ibm-plex-mono",
   display: "swap",
 });
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover" as const,
+};
 
 export const metadata: Metadata = {
   title: "Andri Vogt",
@@ -34,15 +40,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={`${dmSans.variable} ${ibmPlexMono.variable}`}>
-      <head>
-        <script
-          dangerouslySetInnerHTML={{
-            __html: `(function(){try{var t=localStorage.getItem("theme");if(t==="light")document.documentElement.setAttribute("data-theme","light")}catch(e){}})()`,
-          }}
-        />
-      </head>
-      <body>{children}</body>
+    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
+      <body>{children}<div className="swiss-grid"><div /><div /><div /><div /></div></body>
     </html>
   );
 }
