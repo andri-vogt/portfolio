@@ -3,11 +3,11 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion, type Variants } from "framer-motion";
-import aboutImage from "@/assets/frederic-perez-RDNAtCk5rJ8-unsplash.jpg";
+import aboutImage from "@/assets/jeevan-katel--2PE4LUihDQ-unsplash.jpg";
 
 const parent: Variants = {
   hidden: {},
-  show: { transition: { staggerChildren: 0.15 } },
+  show: { transition: { staggerChildren: 0.1 } },
 };
 
 const child: Variants = {
@@ -22,67 +22,55 @@ export default function About() {
       variants={parent}
       initial="hidden"
       whileInView="show"
-      viewport={{ once: true, amount: 0.15 }}
-      className="px-6 md:px-10"
+      viewport={{ once: true, amount: 0.1 }}
+      className="mt-16 md:mt-24"
     >
       <motion.div
         variants={child}
-        className="grid grid-cols-1 md:grid-cols-[2fr_1fr_2fr] gap-y-10"
+        className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 px-6 md:px-10 items-start"
       >
-        <div className="relative aspect-[4/3] overflow-hidden self-center">
-          <Image
-            src={aboutImage}
-            alt=""
-            fill
-            placeholder="blur"
-            sizes="(min-width: 768px) 60vw, 100vw"
-            className="object-cover"
-          />
+        {/* image — cols 1-2 on desktop, last on mobile */}
+        <div className="order-3 md:order-1 col-span-2 md:col-span-2 md:mt-60">
+          <div className="relative aspect-[4/3] overflow-hidden max-w-[280px] md:max-w-none">
+            <Image
+              src={aboutImage}
+              alt=""
+              fill
+              placeholder="blur"
+              sizes="(min-width: 768px) 50vw, 280px"
+              className="object-cover grayscale"
+            />
+          </div>
+          <span className="text-mono-label block mt-3">fig. 02 | mountains</span>
         </div>
 
-        <div className="md:col-start-3">
-          <h2 className="text-mono-label mb-10 md:mb-14">about</h2>
-          <div className="font-sans text-xl md:text-2xl leading-[1.4]">
-            <p>
-              I&apos;m a designer and developer based in Zurich, working at the
-              seam between editorial design and quiet, usable software. Most of
-              what I make is for small teams who want one careful thing rather
-              than ten hurried ones.
-            </p>
-            <p className="mt-6">
-              My practice is built around restraint — typography that earns the
-              page, interfaces that don&apos;t announce themselves, and tools
-              that stay out of their own way.
-            </p>
-          </div>
+        {/* title — col 1 on mobile, col 3 on desktop */}
+        <div className="order-1 md:order-2 py-10 md:py-14">
+          <h3 className="text-section-title">About me</h3>
+        </div>
 
-          <Link
-            href="/cv"
-            className="group mt-8 md:mt-10 inline-flex items-baseline gap-3 font-sans text-xl md:text-2xl leading-[1.4]"
-          >
-            <span className="link-underline">Read the full CV</span>
-            <span
-              aria-hidden
-              className="inline-block transition-transform duration-300 ease-out group-hover:translate-x-1"
+        {/* text — col 2 on mobile, col 4 on desktop */}
+        <div className="order-2 md:order-3 py-10 md:py-14">
+            <div className="font-sans text-xl md:text-2xl leading-[1.4] font-medium">
+              <p>
+                I&apos;m a designer and developer based in Zurich, working at the
+                seam between editorial design and quiet, usable software. Most of
+                what I make is for small teams who want one careful thing rather
+                than ten hurried ones.
+              </p>
+              <p className="mt-6">
+                My practice is built around restraint — typography that earns the
+                page, interfaces that don&apos;t announce themselves, and tools
+                that stay out of their own way.
+              </p>
+            </div>
+
+            <Link
+              href="/cv"
+              className="mt-8 md:mt-10 inline-block font-sans text-xl md:text-2xl leading-[1.4] font-medium link-underline"
             >
-              →
-            </span>
-          </Link>
-
-          <div className="flex flex-col gap-5 mt-10 md:mt-14">
-            <div className="flex flex-col gap-1">
-              <span className="text-mono-label">based</span>
-              <span className="font-mono text-sm">Zurich, CH</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="text-mono-label">focus</span>
-              <span className="font-mono text-sm">design + engineering</span>
-            </div>
-            <div className="flex flex-col gap-1">
-              <span className="text-mono-label">availability</span>
-              <span className="font-mono text-sm">selected projects, 2026</span>
-            </div>
-          </div>
+              [ Read the full CV ]
+            </Link>
         </div>
       </motion.div>
     </motion.section>
