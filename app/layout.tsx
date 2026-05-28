@@ -1,12 +1,6 @@
 import type { Metadata } from "next";
-import { Inter, IBM_Plex_Mono } from "next/font/google";
+import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 const ibmPlexMono = IBM_Plex_Mono({
   subsets: ["latin"],
@@ -18,7 +12,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  viewportFit: "cover" as const,
+  themeColor: "#F7F7F7",
 };
 
 export const metadata: Metadata = {
@@ -40,7 +34,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${inter.variable} ${ibmPlexMono.variable}`}>
+    <html lang="en" className={ibmPlexMono.variable}>
       <body>{children}<div className="swiss-grid"><div /><div /><div /><div /></div></body>
     </html>
   );
