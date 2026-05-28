@@ -53,7 +53,7 @@ export const cv: CV = {
     {
       company: "INNOFORCE Est.",
       role: "Application Specialist",
-      location: "[City]",
+      location: "Vaduz, LI",
       start: "2021",
       end: "2023",
       bullets: [
@@ -66,26 +66,27 @@ export const cv: CV = {
     {
       institution: "Ostschweizer Fachhochschule",
       degree: "BSc. Digital Design",
-      location: "[City]",
+      location: "St. Gallen, CH",
       start: "2018",
       end: "2022",
       notes: "[Optional — thesis, honors, exchange.]",
     },
-      {
+    {
       institution: "Liechtensteinisches Gymnasium",
       degree: "Matura",
-      start: "2018",
-      end: "2022",
-  },
+      location: "Vaduz, LI",
+      start: "2014",
+      end: "2018",
+    },
   ],
   skills: [
     {
       group: "design",
-      items: ["Figma", "[type systems]", "[editorial layout]"],
+      items: ["Figma", "Type systems", "Editorial layout"],
     },
     {
       group: "engineering",
-      items: ["[TypeScript]", "[React]", "[Next.js]", "[Node.js]"],
+      items: ["TypeScript", "React", "Next.js", "Node.js"],
     },
     {
       group: "languages",

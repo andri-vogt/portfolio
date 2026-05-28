@@ -5,9 +5,9 @@ export default function PrintButton() {
     <button
       type="button"
       onClick={() => window.print()}
-      className="no-print font-mono text-sm link-underline self-start cursor-pointer bg-transparent p-0 text-left"
+      className="no-print font-mono text-[length:var(--text-mono)] uppercase tracking-[0.1em] link-underline self-start cursor-pointer bg-transparent p-0 text-left"
     >
-      download pdf ↓
+      [ Download PDF ]
     </button>
   );
 }
