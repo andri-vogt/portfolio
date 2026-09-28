@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, type Variants } from "framer-motion";
 import heroImage from "@/assets/DSC00688.jpg";
+import { useLineReveal, useParallax, lineMask, parallaxLayer } from "./motion";
 
 const parent: Variants = {
   hidden: {},
@@ -15,51 +16,60 @@ const child: Variants = {
 };
 
 export default function Hero() {
+  const { ref, y } = useParallax();
+  const line = useLineReveal();
+
   return (
     <motion.section
       id="top"
       variants={parent}
       initial="hidden"
       animate="show"
-      className="min-h-screen flex flex-col"
+      className="relative min-h-[65svh] md:min-h-[100svh] flex flex-col justify-end pb-[var(--gutter)]"
     >
-      {/* main content area */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-5 md:gap-8 items-center md:items-end flex-1 mt-[52px] md:mt-[56px] px-6 md:px-10">
-        {/* desktop spacers for cols 1-2 */}
-        <div className="hidden md:block" />
-        <div className="hidden md:block" />
+      <div className="relative">
+        {/* ANDRI bleeds off the left edge, VOGT off the right */}
+        <h1 className="text-hero">
+          <span className={lineMask}>
+            <motion.span custom={0} variants={line} className="block -ml-[0.03em]">
+              Andri
+            </motion.span>
+          </span>
+          <span className={lineMask}>
+            <motion.span custom={1} variants={line} className="block text-right -mr-[0.12em]">
+              Vogt
+            </motion.span>
+          </span>
+        </h1>
 
-        {/* image — right-aligned on mobile, cols 3-4 desktop */}
+        {/* roles — tucked under ANDRI, beside the V */}
+        <motion.ul
+          variants={child}
+          className="absolute top-[calc(var(--text-hero)*0.83)] left-[var(--gutter)] md:left-[calc(var(--gutter)_+_var(--col)/2_+_var(--gap)/2)] flex flex-col gap-3 md:gap-5 text-mono-label"
+        >
+          <li>product owner</li>
+          <li>ux designer</li>
+        </motion.ul>
+
+        {/* portrait — laid over the end of ANDRI, flush with the right gutter */}
         <motion.div
           variants={child}
-          className="col-span-2 md:col-span-2 flex items-center justify-end py-6 md:py-10 md:mb-16"
+          className="absolute z-10 right-[var(--gutter)] top-[calc(var(--text-hero)*0.275)] w-[24vw] md:w-[var(--col)]"
         >
-          <div className="w-[65%] md:w-full">
-            <div className="relative aspect-[4/3] overflow-hidden">
+          <div ref={ref} className="relative aspect-[4/3] overflow-hidden">
+            <motion.div style={{ y }} className={parallaxLayer}>
               <Image
                 src={heroImage}
-                alt=""
+                alt="Portrait of Andri Vogt"
                 fill
                 priority
-                sizes="(min-width: 768px) 50vw, 65vw"
+                sizes="(min-width: 768px) 22vw, 24vw"
                 className="object-cover grayscale"
               />
-            </div>
-            <span className="text-mono-label block mt-3">fig. 01 | me</span>
+            </motion.div>
           </div>
         </motion.div>
       </div>
-
-      {/* name at bottom — spans both cols on mobile */}
-      <motion.div variants={child} className="px-6 md:px-10 pb-8 md:pb-12">
-        <h1
-          className="font-sans font-black uppercase leading-[0.85] tracking-[-0.05em]"
-          style={{ fontSize: "clamp(4rem, 15vw, 10rem)" }}
-        >
-          Andri<br />Vogt.
-        </h1>
-        <span className="text-mono-label block mt-4">ux designer | product owner</span>
-      </motion.div>
     </motion.section>
   );
 }

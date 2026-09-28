@@ -5,14 +5,29 @@
   --font-switzer: "Switzer", system-ui, sans-serif;
 }
 
+/* ─── design tokens ─────────────────────────────────────────────
+   Grid: 2 columns on mobile, 4 on desktop. Gutter and gap are fluid
+   so every composition keeps its proportions at any width.
+   --col is one 4-column track; half-column lines (col/2 + gap/2)
+   are used for secondary labels.                                  */
 :root {
-  --bg: #F7F7F7;
+  /* color */
+  --bg: #FFFFFF;
   --fg: #111111;
   --muted: #555555;
   --accent: #FF6600;
   --hairline: #111111;
-  --space-section: 8rem;
-  --space-gutter: 2rem;
+
+  /* layout */
+  --gutter: clamp(1.5rem, 5.6vw, 6rem);
+  --gap: clamp(1.25rem, 2.2vw, 2rem);
+  --col: calc((100vw - 2 * var(--gutter) - 3 * var(--gap)) / 4);
+  --space-section: clamp(6rem, 14vw, 14rem);
+
+  /* type */
+  --text-hero: 26.5vw;
+  --text-headline: 13.75vw;
+  --text-body: clamp(1rem, 0.9rem + 0.45vw, 1.25rem);
   --text-display: clamp(3.5rem, 10vw, 12rem);
   --text-mono: 0.75rem;
 }
@@ -34,13 +49,17 @@ html {
 
 html,
 body {
-  background: var(--bg);
+  background-color: var(--bg);
   color: var(--fg);
   font-family: var(--font-switzer), system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* display type and images bleed off both edges — never let that scroll */
+main {
+  overflow-x: clip;
+}
 
 [id] {
   scroll-margin-top: 5rem;
@@ -90,9 +109,66 @@ body::before {
 .text-mono-label {
   font-family: var(--font-ibm-plex-mono), ui-monospace, monospace;
   font-size: var(--text-mono);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--muted);
+  letter-spacing: 0.02em;
+  text-transform: lowercase;
+  color: var(--fg);
+}
+
+/* ─── components: type + layout ────────────────────────────────
+   Kept in the components layer so Tailwind utilities (md:*, hidden)
+   can always override them.                                      */
+@layer components {
+  /* hero name — ANDRI / VOGT */
+  .text-hero {
+    font-size: var(--text-hero);
+    line-height: 0.75;
+    letter-spacing: -0.05em;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* section headline — ABOUT ME, PROJECTS, LET'S WORK */
+  .text-headline {
+    font-size: var(--text-headline);
+    line-height: 0.8;
+    letter-spacing: 0;
+    font-weight: 900;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  /* running text — about copy, project rows, contact rows */
+  .text-body {
+    font-size: var(--text-body);
+    line-height: 1.6;
+    font-weight: 400;
+  }
+
+  .gutter-x {
+    padding-inline: var(--gutter);
+  }
+
+  .grid-swiss {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    column-gap: var(--gap);
+  }
+
+  /* pull an element through the page gutter to the viewport edge */
+  .bleed-l {
+    margin-left: calc(var(--gutter) * -1);
+  }
+
+  .bleed-r {
+    margin-right: calc(var(--gutter) * -1);
+  }
+
+  @media (min-width: 768px) {
+    .grid-swiss {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
 }
 
 .rule {
@@ -142,15 +218,13 @@ body::before {
   pointer-events: none;
   display: none;
   grid-template-columns: repeat(2, 1fr);
-  gap: 0 20px;
-  padding: 0 24px;
+  column-gap: var(--gap);
+  padding-inline: var(--gutter);
 }
 
 @media (min-width: 768px) {
   .swiss-grid {
     grid-template-columns: repeat(4, 1fr);
-    gap: 0 32px;
-    padding: 0 40px;
   }
 }
 

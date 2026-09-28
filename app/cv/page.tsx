@@ -78,7 +78,7 @@ export default function CVPage() {
                 href={`mailto:${cv.email}`}
                 className="font-mono text-sm link-underline self-start"
               >
-                {cv.email}
+                [ {cv.email} ]
               </a>
             </div>
             <div className="flex flex-col gap-1">
