@@ -6,7 +6,7 @@ import { motion, type Variants } from "framer-motion";
 import Link from "next/link";
 import { projects } from "@/data/projects";
 import workImage from "@/assets/tao-yuan-dK8uO7szEdk-unsplash.jpg";
-import { EASE, useLineReveal, useParallax, lineMask, parallaxLayer } from "./motion";
+import { useLineReveal, useParallax, lineMask, parallaxLayer } from "./motion";
 
 const parent: Variants = {
   hidden: {},
@@ -31,19 +31,17 @@ function ProjectRow({ project }: { project: (typeof projects)[number] }) {
         onBlur={() => setHovered(false)}
         className="block"
       >
-        {/* nested 2-col grid shares the page gap, so title sits on col 3, copy on col 4 */}
-        <motion.div
-          animate={{ x: hovered ? 8 : 0 }}
-          transition={{ duration: 0.35, ease: EASE }}
-          className="grid grid-cols-2 gap-x-[var(--gap)] items-baseline text-body"
+        {/* nested 2-col grid shares the page gap, so title sits on col 3, copy on col 4.
+            On hover / focus the whole entry inverts to white on black; the block is
+            padded out and pulled back by the same amount, so the columns don't move */}
+        <div
+          className={`grid grid-cols-2 gap-x-[var(--gap)] items-baseline text-body py-[0.75em] -my-[0.75em] px-[0.5em] -mx-[0.5em] transition-colors duration-150 ${
+            hovered ? "bg-[color:var(--fg)] text-[color:var(--bg)]" : ""
+          }`}
         >
-          <h3
-            className={`link-underline justify-self-start ${hovered ? "link-underline-active" : ""}`}
-          >
-            [ {project.title} ]
-          </h3>
+          <h3 className="justify-self-start">[ {project.title} ]</h3>
           <p className="md:text-justify">{project.description}</p>
-        </motion.div>
+        </div>
       </Link>
     </motion.li>
   );

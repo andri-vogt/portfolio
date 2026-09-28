@@ -13,15 +13,18 @@ export default function Nav() {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const linkClass =
-    "font-mono text-[length:var(--text-mono)] lowercase tracking-[0.02em] link-underline";
+    "font-mono text-[length:var(--text-body)] lowercase tracking-[0.02em] link-underline";
 
   return (
-    <motion.nav
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
-      className="fixed left-0 right-0 top-0 z-50 gutter-x py-4 md:py-5 bg-[color:var(--bg)]"
-    >
+    // reaches the physical top of the screen and pads past the status bar.
+    // The nav itself stays fully opaque from first paint (Safari 26 won't tint
+    // from an element with opacity < 1) — only its contents fade in.
+    <nav className="fixed left-0 right-0 top-0 z-50 gutter-x pt-[calc(env(safe-area-inset-top)_+_1rem)] md:pt-[calc(env(safe-area-inset-top)_+_1.25rem)] pb-4 md:pb-5 bg-[color:var(--bg)]">
+      <motion.div
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
+      >
       {/* desktop: all links evenly spaced */}
       <ul className="hidden md:flex items-center justify-between">
         <li>
@@ -85,6 +88,7 @@ export default function Nav() {
           </motion.ul>
         )}
       </AnimatePresence>
-    </motion.nav>
+      </motion.div>
+    </nav>
   );
 }

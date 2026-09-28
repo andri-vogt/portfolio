@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -9,9 +9,12 @@ const ibmPlexMono = IBM_Plex_Mono({
   display: "swap",
 });
 
-export const viewport = {
+// viewportFit "cover" lets the page run under the iOS status bar so the fixed
+// nav can paint it white; the nav adds env(safe-area-inset-top) as padding
+export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
+  viewportFit: "cover",
   themeColor: "#FFFFFF",
 };
 
@@ -37,7 +40,15 @@ export default function RootLayout({
     // browser extensions (e.g. cookie-banner blockers) inject classes on <html>
     // before hydration; suppress only this element's attribute mismatch
     <html lang="en" className={ibmPlexMono.variable} suppressHydrationWarning>
-      <body>{children}<div className="swiss-grid"><div /><div /><div /><div /></div></body>
+      <body>
+        {children}
+        <div className="swiss-grid"><div /><div /><div /><div /></div>
+        {/* Safari 26 tints the status bar from a solid fixed element at the top
+            (≤4px from the top, ≥80% wide, ≥3px tall, opaque background, no
+            opacity < 1). Without one it lets scrolled content show through.
+            This strip qualifies on every page and sits above the noise overlay. */}
+        <div aria-hidden className="status-bar-tint" />
+      </body>
     </html>
   );
 }
