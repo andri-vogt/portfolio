@@ -12,7 +12,7 @@ const ibmPlexMono = IBM_Plex_Mono({
 export const viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#F7F7F7",
+  themeColor: "#FFFFFF",
 };
 
 export const metadata: Metadata = {
@@ -34,7 +34,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={ibmPlexMono.variable}>
+    // browser extensions (e.g. cookie-banner blockers) inject classes on <html>
+    // before hydration; suppress only this element's attribute mismatch
+    <html lang="en" className={ibmPlexMono.variable} suppressHydrationWarning>
       <body>{children}<div className="swiss-grid"><div /><div /><div /><div /></div></body>
     </html>
   );

@@ -10,31 +10,22 @@ const navLinks = [
 ];
 
 export default function Nav() {
-  const [grid, setGrid] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
 
-  const toggleGrid = () => {
-    const el = document.querySelector(".swiss-grid") as HTMLElement | null;
-    if (el) el.style.display = !grid ? "grid" : "none";
-    setGrid(!grid);
-  };
-
   const linkClass =
-    "font-mono text-[length:var(--text-mono)] uppercase tracking-[0.1em] link-underline";
+    "font-mono text-[length:var(--text-mono)] lowercase tracking-[0.02em] link-underline";
 
   return (
     <motion.nav
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.4, ease: "easeOut", delay: 0.5 }}
-      className="fixed left-0 right-0 z-50 px-6 md:px-10
-                 top-0 py-4 md:py-5
-                 bg-[color:var(--bg)]"
+      className="fixed left-0 right-0 top-0 z-50 gutter-x py-4 md:py-5 bg-[color:var(--bg)]"
     >
       {/* desktop: all links evenly spaced */}
       <ul className="hidden md:flex items-center justify-between">
         <li>
-          <a href="#top" className={linkClass}>[ AV ]</a>
+          <a href="#top" className={linkClass}>[ av ]</a>
         </li>
         {navLinks.map((link) => (
           <li key={link.href}>
@@ -44,18 +35,21 @@ export default function Nav() {
           </li>
         ))}
         <li>
-          <button onClick={toggleGrid} aria-label="Toggle grid overlay" className={linkClass}>
-            [ grid ]
+          {/* language switch — no German copy wired up yet */}
+          <button type="button" aria-label="Deutsch" className={linkClass}>
+            [ de ]
           </button>
         </li>
       </ul>
 
-      {/* mobile: AV left, menu right */}
+      {/* mobile: av left, menu right */}
       <div className="flex items-center justify-between md:hidden">
-        <a href="#top" className={linkClass}>[ AV ]</a>
+        <a href="#top" className={linkClass}>[ av ]</a>
         <button
+          type="button"
           onClick={() => setMenuOpen(!menuOpen)}
           aria-label="Toggle menu"
+          aria-expanded={menuOpen}
           className={linkClass}
         >
           [ {menuOpen ? "close" : "menu"} ]
@@ -70,7 +64,7 @@ export default function Nav() {
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -10 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="flex flex-col items-end gap-4 pt-6 pb-4"
+            className="flex flex-col items-end gap-4 pt-6 pb-4 md:hidden"
           >
             {navLinks.map((link) => (
               <li key={link.href}>
@@ -84,14 +78,8 @@ export default function Nav() {
               </li>
             ))}
             <li>
-              <button
-                onClick={() => {
-                  toggleGrid();
-                  setMenuOpen(false);
-                }}
-                className={linkClass}
-              >
-                [ grid ]
+              <button type="button" aria-label="Deutsch" className={linkClass}>
+                [ de ]
               </button>
             </li>
           </motion.ul>
